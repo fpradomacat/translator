@@ -1,0 +1,46 @@
+<div class="container">
+  <mat-card>
+    <div class="translation-engine-select">
+      <mat-button-toggle-group name="translationEngine" aria-label="Translate engine">
+        <mat-button-toggle value="googleTranslate">Google Translate</mat-button-toggle>
+        <mat-button-toggle value="azureTranslate">Azure Translate</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>API Key</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Text</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <div class="translate-button">
+    <button mat-raised-button color="primary">Translate</button>
+  </div>
+
+  <mat-card>
+    <mat-card-subtitle>Translated text</mat-card-subtitle>
+    <div class="translation-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Text</mat-label>
+        <textarea matInput disabled></textarea>
+      </mat-form-field>
+      <button mat-icon-button aria-label="Copy translated text"
+              class="copy-translation-btn">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <div class="translate-button">
+    </div>
+  </mat-card>
+
+</div>
+
