@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
 
+## Deploy to Github Pages
+
+Run `ng build --output-path docs --base-href /translator/`. Create a copy of `index.html` and rename it to `404.html`.
+Commit, push and changes will be automatically displayed.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
