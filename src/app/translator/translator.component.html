@@ -1,9 +1,10 @@
 <div class="container">
   <mat-card>
     <div class="translation-engine-select">
-      <mat-button-toggle-group name="translationEngine" aria-label="Translate engine">
-        <mat-button-toggle value="googleTranslate">Google Translate</mat-button-toggle>
-        <mat-button-toggle value="azureTranslate">Azure Translate</mat-button-toggle>
+      <mat-button-toggle-group [(ngModel)]="translationEngine"
+                               name="translationEngine" aria-label="Translate engine">
+        <mat-button-toggle value="google">Google Translate</mat-button-toggle>
+        <mat-button-toggle value="azure">Azure Translate</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 

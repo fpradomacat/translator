@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./translator.component.less']
 })
 export class TranslatorComponent implements OnInit {
+  translationEngine: string = "azure";
 
   constructor() { }
 
