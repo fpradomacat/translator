@@ -11,36 +11,34 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>API Key</mat-label>
-        <input matInput>
+        <input type="text" matInput
+               [(ngModel)]="apiKey">
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Text</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput
+                  [(ngModel)]="textToTranslate"></textarea>
       </mat-form-field>
     </div>
   </mat-card>
 
   <div class="translate-button">
-    <button mat-raised-button color="primary">Translate</button>
+    <button [disabled]="!apiKey || !textToTranslate"
+            mat-raised-button color="primary">
+      Translate
+    </button>
   </div>
 
   <mat-card>
-    <mat-card-subtitle>Translated text</mat-card-subtitle>
-    <div class="translation-container">
-      <mat-form-field appearance="outline">
-        <mat-label>Text</mat-label>
-        <textarea matInput disabled></textarea>
-      </mat-form-field>
-      <button mat-icon-button aria-label="Copy translated text"
-              class="copy-translation-btn">
-        <mat-icon>content_copy</mat-icon>
-      </button>
-    </div>
-    <div class="translate-button">
-    </div>
+    <mat-form-field class="translated-text-input" appearance="outline"
+                    (click)="copyToClipboard(translatedText)">
+      <mat-label>Translated text</mat-label>
+      <textarea [(ngModel)]="translatedText" matInput disabled
+      title="Copy to clipboard"></textarea>
+    </mat-form-field>
   </mat-card>
 
 </div>
