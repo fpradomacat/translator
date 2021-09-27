@@ -26,9 +26,10 @@
   </mat-card>
 
   <div class="translate-button">
-    <button [disabled]="!apiKey || !textToTranslate"
+    <button [disabled]="!apiKey || !textToTranslate || isLoading"
             mat-raised-button color="primary">
       Translate
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
     </button>
   </div>
 

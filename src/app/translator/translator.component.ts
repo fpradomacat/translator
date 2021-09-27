@@ -11,6 +11,7 @@ export class TranslatorComponent implements OnInit {
   translatedText: string = "";
   textToTranslate: string = "";
   apiKey: string = "";
+  isLoading: boolean = false;
 
   constructor() {
   }
