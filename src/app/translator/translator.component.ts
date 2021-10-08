@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AzureTranslatorService } from "../azure-translator.service";
 
 
 @Component({
@@ -13,7 +14,7 @@ export class TranslatorComponent implements OnInit {
   apiKey: string = "";
   isLoading: boolean = false;
 
-  constructor() {
+  constructor(private azureTranslatorService: AzureTranslatorService) {
   }
 
   ngOnInit(): void {
@@ -55,5 +56,11 @@ export class TranslatorComponent implements OnInit {
     }
 
 
+  }
+
+  translate() {
+    this.azureTranslatorService
+      .translate(this.apiKey, "en", this.textToTranslate)
+      .subscribe(x => console.log(x));
   }
 }

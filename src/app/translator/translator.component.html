@@ -3,8 +3,8 @@
     <div class="translation-engine-select">
       <mat-button-toggle-group [(ngModel)]="translationEngine"
                                name="translationEngine" aria-label="Translate engine">
-        <mat-button-toggle value="google">Google Translate</mat-button-toggle>
         <mat-button-toggle value="azure">Azure Translate</mat-button-toggle>
+        <mat-button-toggle value="google">Google Translate</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 
@@ -27,6 +27,7 @@
 
   <div class="translate-button">
     <button [disabled]="!apiKey || !textToTranslate || isLoading"
+            (click)="translate()"
             mat-raised-button color="primary">
       Translate
       <mat-spinner *ngIf="isLoading"></mat-spinner>

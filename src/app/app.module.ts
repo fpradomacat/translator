@@ -15,6 +15,8 @@ import { MatCardModule } from "@angular/material/card";
 import { FormsModule } from "@angular/forms";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
+import { HttpClientModule } from "@angular/common/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatButtonToggleModule,
