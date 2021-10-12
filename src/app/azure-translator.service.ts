@@ -32,14 +32,14 @@ export class AzureTranslatorService {
       })
       .pipe(
         map(res => {
-          let en = res[0].translations.find((x: any) => x.to === 'en').text;
-          let de = res[0].translations.find((x: any) => x.to === 'de').text;
-          let it = res[0].translations.find((x: any) => x.to === 'it').text;
-          let fr = res[0].translations.find((x: any) => x.to === 'fr').text;
-          let ca = res[0].translations.find((x: any) => x.to === 'ca').text;
-          let pt = res[0].translations.find((x: any) => x.to === 'pt').text;
+          let en = res[0].translations.find((x: any) => x.to === 'en').text.replace(/’/g, "'");
+          let de = res[0].translations.find((x: any) => x.to === 'de').text.replace(/’/g, "'");
+          let it = res[0].translations.find((x: any) => x.to === 'it').text.replace(/’/g, "'");
+          let fr = res[0].translations.find((x: any) => x.to === 'fr').text.replace(/’/g, "'");
+          let ca = res[0].translations.find((x: any) => x.to === 'ca').text.replace(/’/g, "'");
+          let pt = res[0].translations.find((x: any) => x.to === 'pt').text.replace(/’/g, "'");
 
-          let result = `:--${en}$en$${en}$es$${value}$de$${de}$it$${it}$fr$${fr}$ca$${ca}$pt$${pt}`;
+          let result = `--:${en}$#$en:${en}$#$es:${value}$#$de:${de}$#$it:${it}$#$fr:${fr}$#$ca:${ca}$#$pt:${pt}`;
           return result;
         })
       );

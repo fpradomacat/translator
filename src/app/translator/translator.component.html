@@ -1,55 +1,58 @@
-<div class="container">
-  <mat-card>
-    <div class="translation-engine-select">
-      <mat-button-toggle-group [(ngModel)]="translationEngine"
-                               name="translationEngine" aria-label="Translate engine">
-        <mat-button-toggle value="azure">Azure Translate</mat-button-toggle>
-        <mat-button-toggle value="google">Google Translate</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+<mat-card class="container">
+  <div class="api-key">
+    <mat-form-field appearance="outline">
+      <mat-label>API Key</mat-label>
+      <input type="text" matInput
+             [(ngModel)]="apiKey">
+    </mat-form-field>
+  </div>
 
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>API Key</mat-label>
-        <input type="text" matInput
-               [(ngModel)]="apiKey">
-      </mat-form-field>
-    </div>
-
-    <div>
+  <div class="translation-box">
+    <!-- Text -->
+    <div class="text-container">
       <mat-form-field appearance="outline">
         <mat-label>Text</mat-label>
-        <textarea matInput
-                  [(ngModel)]="textToTranslate"></textarea>
+        <textarea [(ngModel)]="textToTranslate"
+                  matInput
+                  rows="6"></textarea>
       </mat-form-field>
     </div>
-  </mat-card>
 
-  <div class="translate-button">
+    <!-- Translate button -->
     <button [disabled]="!apiKey || !textToTranslate || isLoading"
             (click)="translate()"
-            mat-raised-button color="primary">
+            mat-raised-button color="primary"
+            class="translate-button">
       Translate
       <mat-spinner *ngIf="isLoading"></mat-spinner>
     </button>
+
+    <!-- Translation -->
+    <div class="translation-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Translated text</mat-label>
+        <textarea [(ngModel)]="translatedText"
+                  matInput
+                  rows="6"
+                  disabled></textarea>
+      </mat-form-field>
+    </div>
   </div>
 
-  <mat-card class="translation-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Translated text</mat-label>
-      <textarea [(ngModel)]="translatedText" matInput disabled></textarea>
-    </mat-form-field>
+  <!-- Copy buttons -->
+  <div class="footer-buttons-container">
     <button [disabled]="!translatedText || isLoading"
             (click)="copyToClipboard()"
-            mat-button>
+            mat-button
+            title="Copy to clipboard">
       Copy
     </button>
     <button [disabled]="!translatedText || isLoading"
             (click)="copyToClipboard(true)"
-            mat-button>
+            mat-button
+            title="Copy to clipboard and escape single quotes">
       Copy for SQL
     </button>
-  </mat-card>
-
-</div>
+  </div>
+</mat-card>
 
