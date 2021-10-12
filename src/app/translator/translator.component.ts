@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AzureTranslatorService } from "../azure-translator.service";
+import { ClipboardService } from "../clipboard.service";
 
 
 @Component({
@@ -9,58 +10,32 @@ import { AzureTranslatorService } from "../azure-translator.service";
 })
 export class TranslatorComponent implements OnInit {
   translationEngine: string = "azure";
-  translatedText: string = "";
+  translatedText: string;
   textToTranslate: string = "";
   apiKey: string = "";
   isLoading: boolean = false;
 
-  constructor(private azureTranslatorService: AzureTranslatorService) {
+  constructor(private azureTranslatorService: AzureTranslatorService,
+              private clipboardService: ClipboardService) {
   }
 
   ngOnInit(): void {
   }
 
-  copyToClipboard(text: string) {
-    if (!navigator.clipboard) {
-      fallbackCopyTextToClipboard(text);
-      return;
-    }
-    navigator.clipboard.writeText(text).then(function () {
-      console.log('Async: Copying to clipboard was successful!');
-    }, function (err) {
-      console.error('Async: Could not copy text: ', err);
-    });
-
-    function fallbackCopyTextToClipboard(text: string) {
-      var textArea = document.createElement("textarea");
-      textArea.value = text;
-
-      // Avoid scrolling to bottom
-      textArea.style.top = "0";
-      textArea.style.left = "0";
-      textArea.style.position = "fixed";
-
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-
-      try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('Fallback: Copying text command was ' + msg);
-      } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
-      }
-
-      document.body.removeChild(textArea);
-    }
-
-
-  }
-
   translate() {
     this.azureTranslatorService
       .translate(this.apiKey, "en", this.textToTranslate)
-      .subscribe(x => console.log(x));
+      .subscribe(x => {
+        console.log(x);
+        this.translatedText = x;
+      });
   }
+
+  copyToClipboard(isForSQL: boolean = false) {
+    this.clipboardService.copy(isForSQL ?
+      this.translatedText.replace(/'/g, "''")
+      :
+      this.translatedText);
+  }
+
 }

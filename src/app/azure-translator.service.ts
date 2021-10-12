@@ -14,27 +14,35 @@ export class AzureTranslatorService {
   private baseUrl: string = 'https://api.cognitive.microsofttranslator.com';
   private endpoint: string = '/translate';
 
-  translate(apiKey: string, targetLanguage: string, value: string): Observable<any> {
-    return this.callApi(apiKey, targetLanguage, value)
-    .pipe(
-      map(x => {
-      let multiLanguageString:string = "";
-
-      x[0].translations.forEach(
-        translation => {
-          multiLanguageString += ':--';
-          multiLanguageString += translation['text'];
+  translate(apiKey: string, targetLanguage: string, value: string) {
+    return this.http.post<Array<any>>(
+      this.baseUrl + this.endpoint,
+      [{text: value}],
+      {
+        headers: {
+          'Ocp-Apim-Subscription-Key': apiKey,
+          'Ocp-Apim-Subscription-Region': 'westeurope',
+          'Content-type': 'application/json'
+        },
+        params: {
+          'api-version': '3.0',
+          'from': 'es',
+          'to': ["en", "de", "it", "fr", "ca", "pt"]
         }
+      })
+      .pipe(
+        map(res => {
+          let en = res[0].translations.find((x: any) => x.to === 'en').text;
+          let de = res[0].translations.find((x: any) => x.to === 'de').text;
+          let it = res[0].translations.find((x: any) => x.to === 'it').text;
+          let fr = res[0].translations.find((x: any) => x.to === 'fr').text;
+          let ca = res[0].translations.find((x: any) => x.to === 'ca').text;
+          let pt = res[0].translations.find((x: any) => x.to === 'pt').text;
+
+          let result = `:--${en}$en$${en}$es$${value}$de$${de}$it$${it}$fr$${fr}$ca$${ca}$pt$${pt}`;
+          return result;
+        })
       );
-      // for (let translation in x[0].translations ){
-      //   multiLanguageString += ':--';
-      //   multiLanguageString += translation['text'];
-      // }
-
-      return multiLanguageString;
-    })
-    ).first();
-
   }
 
   callApi(apiKey: string, targetLanguage: string, value: string): Observable<any> {

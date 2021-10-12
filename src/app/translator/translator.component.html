@@ -34,13 +34,21 @@
     </button>
   </div>
 
-  <mat-card>
-    <mat-form-field class="translated-text-input" appearance="outline"
-                    (click)="copyToClipboard(translatedText)">
+  <mat-card class="translation-container">
+    <mat-form-field appearance="outline">
       <mat-label>Translated text</mat-label>
-      <textarea [(ngModel)]="translatedText" matInput disabled
-      title="Copy to clipboard"></textarea>
+      <textarea [(ngModel)]="translatedText" matInput disabled></textarea>
     </mat-form-field>
+    <button [disabled]="!translatedText || isLoading"
+            (click)="copyToClipboard()"
+            mat-button>
+      Copy
+    </button>
+    <button [disabled]="!translatedText || isLoading"
+            (click)="copyToClipboard(true)"
+            mat-button>
+      Copy for SQL
+    </button>
   </mat-card>
 
 </div>
