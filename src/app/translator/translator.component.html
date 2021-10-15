@@ -44,15 +44,17 @@
   <div class="footer-buttons-container">
     <button [disabled]="!translatedText || isLoading"
             (click)="copyToClipboard()"
+            (blur)="onCopyButtonBlur()"
             mat-button
             title="Copy to clipboard">
-      Copy
+      {{copyButtonLabel}}
     </button>
     <button [disabled]="!translatedText || isLoading"
-            (click)="copyToClipboard(true)"
+            (click)="copyToClipboardForSql()"
+            (blur)="onCopyForSqlButtonBlur()"
             mat-button
             title="Copy to clipboard and escape single quotes">
-      Copy for SQL
+      {{copyForSqlButtonLabel}}
     </button>
   </div>
 </mat-card>
