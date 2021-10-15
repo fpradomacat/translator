@@ -23,11 +23,12 @@ export class TranslatorComponent implements OnInit {
   }
 
   translate() {
+    this.isLoading = true;
     this.azureTranslatorService
       .translate(this.apiKey, "en", this.textToTranslate)
-      .subscribe(x => {
-        console.log(x);
-        this.translatedText = x;
+      .subscribe(response => {
+        this.translatedText = response;
+        this.isLoading = false;
       });
   }
 

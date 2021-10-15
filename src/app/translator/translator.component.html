@@ -24,7 +24,8 @@
             mat-raised-button color="primary"
             class="translate-button">
       Translate
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <mat-icon *ngIf="isLoading">
+        <mat-spinner diameter="20"></mat-spinner></mat-icon>
     </button>
 
     <!-- Translation -->
