@@ -18,7 +18,9 @@ export class TranslatorService {
           function getTranslation(language: string) {
             return res[0].translations
               .find((x: any) => x.to === language).text
-              .replace(/’/g, "'");
+              .replace(/[\u2018\u2019]/g, "'") //TO-DO check why it doesn't work
+              // .replace(/[“”‘’]/g,'')
+              .replace(/"/g, "'");
           }
 
           let en = getTranslation('en');

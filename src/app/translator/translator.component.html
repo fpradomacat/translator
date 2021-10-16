@@ -3,7 +3,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Azure API Key</mat-label>
       <input type="text" matInput
-             [(ngModel)]="apiKey">
+             [formControl]="apiKey">
     </mat-form-field>
   </div>
 
@@ -12,14 +12,14 @@
     <div class="text-container">
       <mat-form-field appearance="outline">
         <mat-label>Text</mat-label>
-        <textarea [(ngModel)]="textToTranslate"
+        <textarea [formControl]="textToTranslate"
                   matInput
                   rows="6"></textarea>
       </mat-form-field>
     </div>
 
     <!-- Translate button -->
-    <button [disabled]="!apiKey || !textToTranslate || isLoading"
+    <button [disabled]="!apiKey.value || !textToTranslate.value || isLoading"
             (click)="translate()"
             mat-raised-button color="primary"
             class="translate-button">
@@ -32,10 +32,9 @@
     <div class="translation-container">
       <mat-form-field appearance="outline">
         <mat-label>Translated text</mat-label>
-        <textarea [(ngModel)]="translatedText"
+        <textarea [formControl]="translatedText"
                   matInput
-                  rows="6"
-                  disabled></textarea>
+                  rows="6"></textarea>
       </mat-form-field>
     </div>
   </div>
@@ -43,7 +42,7 @@
   <!-- Copy buttons -->
   <div class="footer-buttons-container">
     <app-button-with-label-change-on-click
-      [isDisabled]="!translatedText || isLoading"
+      [isDisabled]="!translatedText.value || isLoading"
       [label]="'Copy'"
       [labelClicked]="'¡Copied!'"
       [colorClicked]="'mediumpurple'"
@@ -52,7 +51,7 @@
     ></app-button-with-label-change-on-click>
 
     <app-button-with-label-change-on-click
-      [isDisabled]="!translatedText || isLoading"
+      [isDisabled]="!translatedText.value || isLoading"
       [label]="'Copy for SQL'"
       [labelClicked]="'¡Copied!'"
       [colorClicked]="'mediumpurple'"

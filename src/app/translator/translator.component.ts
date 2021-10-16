@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClipboardService } from "../clipboard.service";
 import { TranslatorService } from "../translator.service";
+import { FormControl } from "@angular/forms";
 
 
 @Component({
@@ -10,9 +11,9 @@ import { TranslatorService } from "../translator.service";
 })
 export class TranslatorComponent implements OnInit {
   // Translation
-  textToTranslate: string = "";
-  translatedText: string;
-  apiKey: string = "";
+  textToTranslate: FormControl = new FormControl('');
+  translatedText: FormControl = new FormControl({value: '', disabled: true});
+  apiKey: FormControl = new FormControl('');
 
   // Loader
   isLoading: boolean = false;
@@ -27,19 +28,19 @@ export class TranslatorComponent implements OnInit {
   translate() {
     this.isLoading = true;
     this.translatorService
-      .translate(this.apiKey, this.textToTranslate)
+      .translate(this.apiKey.value.trim(), this.textToTranslate.value.trim())
       .subscribe(response => {
-        this.translatedText = response;
+        this.translatedText.setValue(response);
         this.isLoading = false;
       });
   }
 
   copyToClipboard(event: Event) {
-    this.clipboardService.copy(this.translatedText);
+    this.clipboardService.copy(this.translatedText.value);
   }
 
   copyToClipboardForSql(event: Event) {
-    this.clipboardService.copy(this.translatedText.replace(/'/g, "''"));
+    this.clipboardService.copy(this.translatedText.value.replace(/'/g, "''"));
   }
 
 }
