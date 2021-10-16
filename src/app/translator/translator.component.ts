@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AzureTranslatorService } from "../azure-translator.service";
 import { ClipboardService } from "../clipboard.service";
+import { TranslatorService } from "../translator.service";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class TranslatorComponent implements OnInit {
   // Loader
   isLoading: boolean = false;
 
-  constructor(private azureTranslatorService: AzureTranslatorService,
+  constructor(private translatorService: TranslatorService,
               private clipboardService: ClipboardService) {
   }
 
@@ -26,8 +26,8 @@ export class TranslatorComponent implements OnInit {
 
   translate() {
     this.isLoading = true;
-    this.azureTranslatorService
-      .translate(this.apiKey, "en", this.textToTranslate)
+    this.translatorService
+      .translate(this.apiKey, this.textToTranslate)
       .subscribe(response => {
         this.translatedText = response;
         this.isLoading = false;
