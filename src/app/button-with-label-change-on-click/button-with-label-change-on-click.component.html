@@ -1,0 +1,8 @@
+<button [disabled]="isDisabled"
+        (click)="onClickButton($event)"
+        (blur)="onBlur()"
+        [ngStyle]="{'color': color}"
+        mat-raised-button
+        title="{{title}}">
+  {{btnLabel}}
+</button>

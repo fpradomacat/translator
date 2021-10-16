@@ -42,20 +42,24 @@
 
   <!-- Copy buttons -->
   <div class="footer-buttons-container">
-    <button [disabled]="!translatedText || isLoading"
-            (click)="copyToClipboard()"
-            (blur)="onCopyButtonBlur()"
-            mat-button
-            title="Copy to clipboard">
-      {{copyButtonLabel}}
-    </button>
-    <button [disabled]="!translatedText || isLoading"
-            (click)="copyToClipboardForSql()"
-            (blur)="onCopyForSqlButtonBlur()"
-            mat-button
-            title="Copy to clipboard and escape single quotes">
-      {{copyForSqlButtonLabel}}
-    </button>
+    <app-button-with-label-change-on-click
+      [isDisabled]="!translatedText || isLoading"
+      [label]="'Copy'"
+      [labelClicked]="'¡Copied!'"
+      [colorClicked]="'mediumpurple'"
+      [title]="'Copy to clipboard'"
+      (onClick)="copyToClipboard($event)"
+    ></app-button-with-label-change-on-click>
+
+    <app-button-with-label-change-on-click
+      [isDisabled]="!translatedText || isLoading"
+      [label]="'Copy for SQL'"
+      [labelClicked]="'¡Copied!'"
+      [colorClicked]="'mediumpurple'"
+      [title]="'Copy to clipboard and escape single quotes'"
+      (onClick)="copyToClipboardForSql($event)"
+    ></app-button-with-label-change-on-click>
+
   </div>
 </mat-card>
 

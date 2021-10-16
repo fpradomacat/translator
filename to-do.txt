@@ -8,3 +8,4 @@ TO-DO
 -Misma altura los textareas (el de la izq queda más pequeño)
 -boton eliminar texto
 -Chequear si la API key es correcta
+-Cuando se cliquea el botón de copyForSql, se mueve el otro al cambiar el largo del label--> width fijo?

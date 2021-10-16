@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AzureTranslatorService } from "../azure-translator.service";
 import { ClipboardService } from "../clipboard.service";
-import { Labels } from "./translator-labels";
 
 
 @Component({
@@ -11,16 +10,12 @@ import { Labels } from "./translator-labels";
 })
 export class TranslatorComponent implements OnInit {
   // Translation
-  translatedText: string;
   textToTranslate: string = "";
+  translatedText: string;
   apiKey: string = "";
 
   // Loader
   isLoading: boolean = false;
-
-  // Buttons
-  copyButtonLabel: string = Labels.Copy;
-  copyForSqlButtonLabel: string = Labels.CopyForSql;
 
   constructor(private azureTranslatorService: AzureTranslatorService,
               private clipboardService: ClipboardService) {
@@ -39,21 +34,11 @@ export class TranslatorComponent implements OnInit {
       });
   }
 
-  onCopyButtonBlur() {
-    this.copyButtonLabel = Labels.Copy;
-  }
-
-  onCopyForSqlButtonBlur() {
-    this.copyForSqlButtonLabel = Labels.CopyForSql;
-  }
-
-  copyToClipboard() {
-    this.copyButtonLabel = Labels.Copied;
+  copyToClipboard(event: Event) {
     this.clipboardService.copy(this.translatedText);
   }
 
-  copyToClipboardForSql() {
-    this.copyForSqlButtonLabel = Labels.Copied;
+  copyToClipboardForSql(event: Event) {
     this.clipboardService.copy(this.translatedText.replace(/'/g, "''"));
   }
 
