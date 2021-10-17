@@ -31,15 +31,37 @@ export class TranslatorComponent implements OnInit {
         distinctUntilChanged()
       )
       .pipe(tap(() => this.isLoading = true))
-      .subscribe(() => {
-          this.translatorService
-            .translate(this.translationForm.get('apiKey')?.value.trim(), this.translationForm.get('textToTranslate')?.value.trim())
-            .subscribe(response => {
-              this.translationForm.get('translatedText')?.setValue(response);
-              this.isLoading = false;
-            });
-        }
-      );
+      .subscribe(() => this.translate());
+
+    this.translationForm.get('apiKey')?.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .pipe(tap(() => this.isLoading = true))
+      .subscribe(() => this.translate());
+  }
+
+  translate() {
+    if (!this.isEmpty(this.translationForm.get('apiKey')?.value.trim())
+      && !this.isEmpty(this.translationForm.get('textToTranslate')?.value.trim())) {
+      this.isLoading = true;
+      this.translatorService
+        .translate(this.translationForm.get('apiKey')?.value.trim(), this.translationForm.get('textToTranslate')?.value.trim())
+        .subscribe(response => {
+            this.translationForm.get('translatedText')?.setValue(response);
+            this.isLoading = false;
+          },
+          error => {
+            this.translationForm.get('translatedText')?.setValue('');
+            this.isLoading = false
+          });
+    } else
+      this.isLoading = false;
+  }
+
+  isEmpty(str: string) {
+    return (!str || str.length === 0);
   }
 
   copyToClipboard(event: Event) {
