@@ -1,38 +1,34 @@
-<mat-card class="container">
+<mat-card class="container" [formGroup]="translationForm">
   <div class="api-key">
     <mat-form-field appearance="outline">
       <mat-label>Azure API Key</mat-label>
       <input type="text" matInput
-             [formControl]="apiKey">
+             formControlName="apiKey">
     </mat-form-field>
   </div>
 
   <div class="translation-box">
-    <!-- Text -->
+    <!-- Text to translate -->
     <div class="text-container">
       <mat-form-field appearance="outline">
         <mat-label>Text</mat-label>
-        <textarea [formControl]="textToTranslate"
+        <textarea formControlName="textToTranslate"
                   matInput
                   rows="6"></textarea>
       </mat-form-field>
     </div>
 
-    <!-- Translate button -->
-    <button [disabled]="!apiKey.value || !textToTranslate.value || isLoading"
-            (click)="translate()"
-            mat-raised-button color="primary"
-            class="translate-button">
-      Translate
-      <mat-icon *ngIf="isLoading">
-        <mat-spinner diameter="20"></mat-spinner></mat-icon>
-    </button>
-
-    <!-- Translation -->
-    <div class="translation-container">
+    <!-- Translated text -->
+    <div class="translation-container"
+         [ngClass]="{'lighten': isLoading}">
+      <div class="loader">
+        <mat-icon *ngIf="isLoading">
+          <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
+      </div>
       <mat-form-field appearance="outline">
         <mat-label>Translated text</mat-label>
-        <textarea [formControl]="translatedText"
+        <textarea formControlName="translatedText"
                   matInput
                   rows="6"></textarea>
       </mat-form-field>
@@ -42,7 +38,7 @@
   <!-- Copy buttons -->
   <div class="footer-buttons-container">
     <app-button-with-label-change-on-click
-      [isDisabled]="!translatedText.value || isLoading"
+      [isDisabled]="!translationForm.get('translatedText')?.value || isLoading"
       [label]="'Copy'"
       [labelClicked]="'¡Copied!'"
       [colorClicked]="'mediumpurple'"
@@ -51,7 +47,7 @@
     ></app-button-with-label-change-on-click>
 
     <app-button-with-label-change-on-click
-      [isDisabled]="!translatedText.value || isLoading"
+      [isDisabled]="!translationForm.get('translatedText')?.value || isLoading"
       [label]="'Copy for SQL'"
       [labelClicked]="'¡Copied!'"
       [colorClicked]="'mediumpurple'"

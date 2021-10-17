@@ -5,23 +5,35 @@
 
     .text-container {
       flex: 1 1 0px;
-    }
+      margin-right: 0.25em;
 
-    .translate-button {
-      flex: 1 1 0px;
-      max-width: 100px;
-
-      margin: 0 1em;
-      align-self: center;
+      textarea {
+        min-height: 100px;
+      }
     }
 
     .translation-container {
       flex: 1 1 0px;
+      margin-left: 0.25em;
+      position: relative;
 
+      .loader {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+      }
+
+      textarea {
+        min-height: 100px;
+      }
+    }
+
+    .lighten {
+      opacity: 0.5;
     }
   }
 
-  .footer-buttons-container{
+  .footer-buttons-container {
     text-align: end;
 
     app-button-with-label-change-on-click + app-button-with-label-change-on-click {

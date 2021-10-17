@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { AzureTranslatorService } from "./azure-translator.service";
-import { map } from "rxjs/operators";
+import { delay, map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ export class TranslatorService {
   constructor(private azureTranslatorService : AzureTranslatorService) { }
 
   translate(apiKey: string, value: string): Observable<string> {
+    // return of(value ? 'Prueba' : '').pipe(delay(1500));
+
     return this.azureTranslatorService
       .translate(apiKey, value)
       .pipe(
