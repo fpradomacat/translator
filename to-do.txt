@@ -1,11 +1,9 @@
 ON-GOING
--Animación botones copiar texto
 
 TO-DO
--refactor service
+-Custom form validators
 -Hacer responsive
--achicar api key
+-Acortar campo api key
 -Misma altura los textareas (el de la izq queda más pequeño)
--boton eliminar texto
 -Chequear si la API key es correcta
--Cuando se cliquea el botón de copyForSql, se mueve el otro al cambiar el largo del label--> width fijo?
+-Github actions
